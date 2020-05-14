@@ -1,17 +1,22 @@
 #!/bin/bash -x
 
 echo "Welcome to Employee Wage Computation Prograam on Master Branch"
-presenty=$((RANDOM % 2))
-isPresent=1
+presenty=$((RANDOM % 3))
+isPartTime=1
+isFullTime=2
+salaryPerHr=20
 
-if [ $isPresent -eq $presenty ]
+if [ $isPartTime -eq $presenty ]
 then
-	saleryPerHr=20
-	workHrPerDay=8
-	salary=$((saleryPerHr * workHrPerDay))
-	echo "Present"
+	echo "Present for part time"
+	workHrs=4
+elif [ $isFullTime -eq $presenty ]
+then
+	echo "Present for Full Time"
+	workHrs=8
 else
 	echo "Absent"
-	salary=0
 fi
+
+salary=$((workHrs * salaryPerHr))
 echo "Salary: "$salary
