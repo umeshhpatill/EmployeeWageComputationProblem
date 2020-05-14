@@ -1,11 +1,13 @@
 #!/bin/bash -x
 
+declare -A dailyWage
 
 IS_PART_TIME=1;
 IS_FULL_TIME=2;
 MAX_HRS_IN_MONTH=10;
 EMP_RATE_PER_HR=20;
 NUM_WORKING_DAYS=20;
+
 
 totalEmpHr=0;
 totalWorkingDays=0;
@@ -37,10 +39,12 @@ do
         empCheck=$((RANDOM % 3))
         empHrs="$( getWorkHrs $empCheck )"
         totalEmpHr=$(($totalEmpHr + $empHrs))
-	dailyWage[$totalWorkingDays]="$( getEmpWage $empHrs )"
+	dailyWage["Day $totalWorkingDays"]="$( getEmpWage $empHrs )"
 done
 
 echo ${dailyWage[@]}
+echo ${!dailyWage[@]}
 totalSalary=$((totalEmpHr*$EMP_RATE_PER_HR));
 echo "Total Employee Hours: " $totalEmpHr;
 echo "Total Employee salary: "$totalSalary;
+
